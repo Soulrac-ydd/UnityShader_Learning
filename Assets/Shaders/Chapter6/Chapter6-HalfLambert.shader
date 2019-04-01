@@ -1,4 +1,4 @@
-﻿Shader "Unity Shaders Book/Chapter 6/Diffuse Pixel-Level"
+﻿Shader "Unity Shaders Book/Chapter 6/HalfLambert"
 {
 	Properties
 	{
