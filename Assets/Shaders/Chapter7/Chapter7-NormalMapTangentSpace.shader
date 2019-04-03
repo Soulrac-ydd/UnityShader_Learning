@@ -16,7 +16,7 @@ Shader "Unity Shaders Book/Chapter 7/Normal Map In Tangent Space"
 	{
 		Pass
 		{
-			Tags ( "LightMode" = "ForwardBase" )
+			Tags { "LightMode" = "ForwardBase" }
 
 			CGPROGRAM
 
@@ -45,7 +45,7 @@ Shader "Unity Shaders Book/Chapter 7/Normal Map In Tangent Space"
 			struct v2f
 			{
 				float4 pos : SV_POSITION;
-				float3 uv : TEXCOORD0;
+				float4 uv : TEXCOORD0;
 				float3 lightDir : TEXCOORD1;
 				float3 viewDir : TEXCOORD2;
 			};
@@ -138,9 +138,37 @@ Shader "Unity Shaders Book/Chapter 7/Normal Map In Tangent Space"
 			
 			fixed4 frag (v2f i) : SV_Target
 			{
+				fixed3 tangentLightDir = normalize(i.lightDir);
+				fixed3 tangentViewDir = normalize(i.viewDir);
+				
+				// Get the texel in the normal map
+				fixed4 packedNormal = tex2D(_BumpMap, i.uv.zw);
+				
+				fixed3 tangentNormal;
+				// If the texture is not marked as "Normal map"
+//				tangentNormal.xy = (packedNormal.xy * 2 - 1) * _BumpScale;
+//				tangentNormal.z = sqrt(1.0 - saturate(dot(tangentNormal.xy, tangentNormal.xy)));
+				
+				// Or mark the texture as "Normal map", and use the built-in funciton
+				tangentNormal = UnpackNormal(packedNormal);
+				tangentNormal.xy *= _BumpScale;
+				tangentNormal.z = sqrt(1.0 - saturate(dot(tangentNormal.xy, tangentNormal.xy)));
+				
+				fixed3 albedo = tex2D(_MainTex, i.uv).rgb * _Color.rgb;
+				
+				fixed3 ambient = UNITY_LIGHTMODEL_AMBIENT.xyz * albedo;
+				
+				fixed3 diffuse = _LightColor0.rgb * albedo * max(0, dot(tangentNormal, tangentLightDir));
 
+				fixed3 halfDir = normalize(tangentLightDir + tangentViewDir);
+				fixed3 specular = _LightColor0.rgb * _Specular.rgb * pow(max(0, dot(tangentNormal, halfDir)), _Gloss);
+				
+				return fixed4(ambient + diffuse + specular, 1.0);
 			}
+
 			ENDCG
 		}
 	}
+
+	Fallback "Specular"
 }
