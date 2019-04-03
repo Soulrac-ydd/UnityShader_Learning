@@ -108,4 +108,4 @@ inline fixed3 UnpackNormal(fixed4 packednormal)
 >
 > 由于法线是单位向量，我们便可以通过法线的xy分量值计算出z分量值，因此我们可以仅存储xy方向从而推导得到z方向，这就进一步缩小了法线纹理所占内存。
 >
-> 当然，上述情况的前提是把纹理的Texture Type选择为Normal map，如果没有使用这个设置，就需要手动在代码中进行反映射过程，反之则需要按上面所述调用UnpackNormal内置函数处理。
+> 当然，上述情况的前提是把纹理的Texture Type选择为Normal map，如果没有使用这个设置，就需要手动在代码中进行反映射过程，反之则需要按上面所述调用UnpackNormal内置函数进行处理。
