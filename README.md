@@ -128,7 +128,7 @@ fixed halfLambert = 0.5 * dot(worldNormal, worldLightDir) + 0.5;
 fixed3 diffuse = _LightColor0.rgb * tex2D(_RampTex, fixed2(halfLambert, halfLambert)).rgb * _Color.rgb;
 ```
 
-第一行使用 **HalfLambert** 计算出漫反射系数，其区间在[0,1]范围内。
+第一行使用 **HalfLambert光照模型** 计算出漫反射系数，其区间在[0,1]范围内。
 
 第二行是漫反射结果的计算公式，其中的漫反射颜色是使用对渐变纹理进行采样的方式得到的：
 
