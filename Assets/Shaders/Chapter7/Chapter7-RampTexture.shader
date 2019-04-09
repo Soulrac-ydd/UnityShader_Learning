@@ -1,4 +1,4 @@
-﻿Shader "Unity Shders Book/Chapter 7/Ramp Texture" 
+﻿Shader "Unity Shaders Book/Chapter 7/Ramp Texture" 
 {
 	Properties 
 	{
