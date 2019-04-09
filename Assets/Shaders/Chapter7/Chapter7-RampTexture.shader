@@ -64,9 +64,7 @@
 				fixed3 ambient = UNITY_LIGHTMODEL_AMBIENT.xyz;
 
 				fixed halfLambert = 0.5 * dot(worldNormal, worldLightDir) + 0.5;
-				fixed3 diffuseColor = tex2D(_RampTex, fixed2(halfLambert, halfLambert)).rgb * _Color.rgb;
-
-				fixed3 diffuse = _LightColor0.rgb * diffuseColor;
+				fixed3 diffuse = _LightColor0.rgb * tex2D(_RampTex, fixed2(halfLambert, halfLambert)).rgb * _Color.rgb;
 
 				fixed3 viewDir = normalize(UnityWorldSpaceViewDir(i.worldPos));
 				fixed3 halfDir = normalize(worldLightDir + viewDir);
