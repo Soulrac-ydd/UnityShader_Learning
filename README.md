@@ -1,5 +1,7 @@
 # UnityShader_Learning
+
 ---
+
 ## 漫反射光照模型（Diffuse）
 
 ### 逐顶点
@@ -109,8 +111,32 @@ inline fixed3 UnpackNormal(fixed4 packednormal)
 > 由于法线是单位向量，我们便可以通过法线的xy坐标值计算出z坐标值，因此我们可以仅存储xy坐标从而推导得到z坐标，这就进一步缩小了法线贴图所占空间。
 >
 > 而对于不同的编码方式，如何用统一的方式对其进行解码，这里有一个比较技巧性的方法：
->> `packednormal.x *= packednormal.w`
+>> `packednormal.x *= packednormal.w;`
 >
 > 由于DXT5nm和BC5两种编码格式的R通道和A通道乘积均为x，也就是对应法线的x坐标值，同时两者的G通道皆对应法线的y坐标值，因此可以利用这个特点进行统一解码。
 >
 > 当然，**上述情况的前提是把纹理贴图的Texture Type选择为Normal map**，如果没有使用这个设置，就需要手动在代码中进行反映射过程，反之则需要如上所述调用UnpackNormal内置函数进行处理。
+
+---
+
+## 渐变纹理（Ramp Texture）
+
+渐变纹理一般用于控制漫反射光照的效果，下面是核心代码：
+
+```cpp
+fixed halfLambert = 0.5 * dot(worldNormal, worldLightDir) + 0.5;
+fixed3 diffuse = _LightColor0.rgb * tex2D(_RampTex, fixed2(halfLambert, halfLambert)).rgb * _Color.rgb;
+```
+
+第一行使用 **HalfLambert光照模型** 计算出漫反射系数，其区间在[0,1]范围内。
+
+第二行是漫反射结果的计算公式，其中材质的漫反射颜色是使用对渐变纹理进行采样的方式得到的：
+
+```cpp
+tex2D(_RampTex, fixed2(halfLambert, halfLambert);
+```
+
+关键就在这里，**使用第一行计算出来的漫反射系数作为渐变纹理的纹理坐标进行采样。** 原理如下：
+
+> 模型顶点的法线与光源方向夹角越大，该顶点受到的光照也越弱，计算出halfLambert的值就越小，也就越接近0，对应渐变纹理的坐标就越靠近左下角。反之，模型顶点的法线与光源方向夹角越小，该顶点受到的光照也越强，计算出halfLambert的值就越大，也就越接近1，对应渐变纹理的坐标就越靠近右上角。而渐变纹理从左到右一般是由深到浅的，因此可以使用渐变纹理来模拟漫反射光照的强弱（色调）变化。
+
