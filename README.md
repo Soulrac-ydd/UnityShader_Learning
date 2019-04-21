@@ -1,6 +1,6 @@
 # UnityShader_Learning
 
-> 引用资料：https://github.com/candycat1992/Unity_Shaders_Book
+> 参考资料：https://github.com/candycat1992/Unity_Shaders_Book
 
 ---
 
