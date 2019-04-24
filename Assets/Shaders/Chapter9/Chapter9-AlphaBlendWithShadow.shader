@@ -19,7 +19,7 @@
 			Blend SrcAlpha OneMinusSrcAlpha
 			
 			CGPROGRAM
-			
+
 			#pragma multi_compile_fwdbase
 			
 			#pragma vertex vert

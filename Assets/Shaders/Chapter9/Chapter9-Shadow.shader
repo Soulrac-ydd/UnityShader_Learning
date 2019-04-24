@@ -74,7 +74,7 @@
 				fixed atten = 1.0;
 				
 				fixed shadow = SHADOW_ATTENUATION(i);
-
+				
 				return fixed4(ambient + (diffuse + specular) * atten * shadow, 1.0);
 			}
 			
