@@ -34,7 +34,7 @@
 			struct a2v
 			{
 				float4 vertex : POSITION;
-				float4 normal : NORMAL;
+				float3 normal : NORMAL;
 			};
 
 			struct v2f
