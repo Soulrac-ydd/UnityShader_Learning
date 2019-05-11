@@ -143,6 +143,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 416a5285fb28b274e8e20d3fb8922b00, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  material: {fileID: 2100000, guid: c54acbf662832434a9f42d1ac12682cb, type: 2}
+  m_textureWidth: 512
+  m_backgroundColor: {r: 1, g: 1, b: 1, a: 1}
+  m_circleColor: {r: 1, g: 0.9203187, b: 0, a: 1}
+  m_blurFactor: 10
 --- !u!65 &934703051
 BoxCollider:
   m_ObjectHideFlags: 0
