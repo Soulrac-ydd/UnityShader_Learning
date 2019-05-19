@@ -1,10 +1,11 @@
 fileFormatVersion: 2
-guid: a39fac5019dc84c2daa093562d6d706a
+guid: e4c5df299d06a437dac067da1ae0ddb9
+timeCreated: 1443515044
+licenseType: Free
 MonoImporter:
-  externalObjects: {}
   serializedVersion: 2
   defaultReferences:
-  - motionBlurShader: {fileID: 4800000, guid: e7015ab07e2a060468d69ccbcef6105f, type: 3}
+  - edgeDetectShader: {fileID: 4800000, guid: 32ace62eb7d9c4aa4986c5f1cd84a77c, type: 3}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 
