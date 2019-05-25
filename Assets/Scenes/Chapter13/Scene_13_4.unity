@@ -628,14 +628,16 @@ MonoBehaviour:
   m_GameObject: {fileID: 1471498147}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0abeaa60fa8094b838d0612e65658ab0, type: 3}
+  m_Script: {fileID: 11500000, guid: e4c5df299d06a437dac067da1ae0ddb9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fogShader: {fileID: 4800000, guid: dc95d52266eb84c49ad65a530b3d5cad, type: 3}
-  fogDensity: 1.2
-  fogColor: {r: 0.627451, g: 0.627451, b: 0.54901963, a: 1}
-  fogStart: -5
-  fogEnd: -3
+  edgeDetectShader: {fileID: 4800000, guid: 64ac3b477a4b4ad4391cb41b93d6ca32, type: 3}
+  edgesOnly: 1
+  edgeColor: {r: 0, g: 0, b: 0, a: 1}
+  backgroundColor: {r: 1, g: 1, b: 1, a: 1}
+  sampleDistance: 1
+  sensitivityDepth: 1
+  sensitivityNormals: 1
 --- !u!1 &1603096760
 GameObject:
   m_ObjectHideFlags: 0
